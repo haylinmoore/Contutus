@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Contutus</title>
+    <script src="../contutus.js"></script>
+</head>
+<body>
+
+<div style="text-align: center;" class="main">
+    <h1>Contutus</h1>
+    <div id="routeable" style="background-color: lightblue"></div>
+    <div id="other-routeable" style="background-color: red"></div>
+</div>
+
+<script>
+
+    function generatePage(path, metadata){
+        metadata = metadata || "";
+        let temp = document.createElement("h3");
+        temp.innerText = `You are on ${path} with the metadata of ${JSON.stringify(metadata)}`;
+        return temp;
+    }
+
+    routeable = new Contutus(document.getElementById("routeable"));
+    routeable.register({
+        "/": [generatePage, "Home"],
+        "/beep": generatePage,
+        "/boop/boop": generatePage,
+        "/dink/donk": generatePage,
+        "/$404$": [generatePage, "404"],
+        "/dink/$404$": [generatePage, "Dink 404"]
+    });
+
+    _Contutus.register(routeable);
+
+
+</script>
+
+</body>
+</html>
