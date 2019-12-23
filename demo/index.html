@@ -1,14 +1,20 @@
 <html>
 <head>
-    <title>Contutus</title>
-    <script src="../contutus.js"></script>
+    <title>Index</title>
+    <script src="../src/contutus.js"></script>
 </head>
 <body>
 
 <div style="text-align: center;" class="main">
-    <h1>Contutus</h1>
+    <h1>Index</h1>
+    <ul>
+        <li><a href="#/">/</a></li>
+        <li><a href="#/beep">/beep</a></li>
+        <li><a href="#/boop/boop">/boop/boop</a></li>
+        <li><a href="#/boop/donk">/boop/donk</a></li>
+        <li><a href="#/somepagethatdoesnotexist">somepagethatdoesnotexist</a></li>
+    </ul>
     <div id="routeable" style="background-color: lightblue"></div>
-    <div id="other-routeable" style="background-color: red"></div>
 </div>
 
 <script>
@@ -21,16 +27,16 @@
     }
 
     routeable = new Contutus(document.getElementById("routeable"));
-    routeable.register({
+    routeable.registerPath({
         "/": [generatePage, "Home"],
         "/beep": generatePage,
         "/boop/boop": generatePage,
-        "/dink/donk": generatePage,
+        "/boop/donk": generatePage,
         "/$404$": [generatePage, "404"],
-        "/dink/$404$": [generatePage, "Dink 404"]
+        "/boop/$404$": [generatePage, "boop 404"]
     });
 
-    _Contutus.register(routeable);
+    _Contutus.registerInstance(routeable);
 
 
 </script>

@@ -1,0 +1,19 @@
+{
+  "name": "contutus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/contutus.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herohamp/Contutus.git"
+  },
+  "author": "Hampton Moore",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/herohamp/Contutus/issues"
+  },
+  "homepage": "https://github.com/herohamp/Contutus#readme"
+}

@@ -2,32 +2,37 @@
 
 let _Contutus = {
     registered: [],
-    register: function(instance){
+    registerInstance: async function(instance){
         this.registered.push(instance);
-        instance.routeTo(window.location.hash);
+        await instance.routeTo(window.location.hash);
     }
-}
+};
 
-window.addEventListener('hashchange', function(){
+window.addEventListener('hashchange', async function(){
     for (let instance of _Contutus.registered){
-        instance.routeTo(window.location.hash);
+        await instance.routeTo(window.location.hash);
     }
 }, false);
 
 if (window.location.hash == "")
     window.location.hash = "/";
 
-// Contutus class
+/**
+ * this is the Contutus Class
+ * @example
+ * let view = new Index(document.getElementById("main"));
+ */
 class Contutus {
     element;
     routeTable = {
 
     }
+
     constructor(element) {
         this.element = element;
     }
 
-    register(routes){
+    registerPath(routes){
         for (let path in routes) {
             let routeData = routes[path];
             let pathSplit = path.split("/");
@@ -50,7 +55,7 @@ class Contutus {
         }
     }
 
-    routeTo(path){
+    async routeTo(path){
         let pathSplit = path.split("/");
         pathSplit.shift();
 
@@ -62,6 +67,7 @@ class Contutus {
         // lets find the route to run
         while (!routeToRun) {
             if (pathSplit.length == 1) {
+
                 let currentRoute = routeTableLocation[pathSplit[0]];
 
                 if (currentRoute == undefined) {
@@ -94,16 +100,17 @@ class Contutus {
                     current404 = currentRoute["$404$"];
                 }
 
+                routeTableLocation = currentRoute;
                 pathSplit.shift();
             }
         }
 
         // Lets run routeToRun
         if (typeof routeToRun == "function")
-            newView = routeToRun(path);
+            newView = await routeToRun(path);
 
         if (Array.isArray(routeToRun))
-            newView = routeToRun[0](path, routeToRun.slice(1));
+            newView = await routeToRun[0](path, routeToRun.slice(1));
 
         // Now lets set the new contents
         while(this.element.firstChild) {
@@ -118,4 +125,4 @@ class Contutus {
     }
 }
 
-console.log('Contutus has loaded :)');
+console.log('Index has loaded :)');
